@@ -21,6 +21,6 @@ class Main(object) :
            temp_list['book_publisher'] = content4[3].text
            temp_list['book_find'] = content4[4].text
            temp_list['book_num'] = content4[5].text
-           print(temp_list)
+           #print(temp_list)
            return_list.append(temp_list)
        return return_list

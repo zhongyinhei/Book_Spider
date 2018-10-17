@@ -19,20 +19,7 @@ class main(object):
         password.send_keys (pwd)
         button = driver.find_element_by_id ('ctl00_ctl00_ContentPlaceHolder1_RightContent_imgbtnSubmit')
         button.click ( )
-
-<<<<<<< HEAD
-<<<<<<< HEAD
         time.sleep (5)
-=======
-<<<<<<< HEAD
-        time.sleep (5)
-=======
-        time.sleep (1)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-        time.sleep (5)
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         cookie = "; ".join ([item["name"] + "=" + item["value"] + "\n" for item in driver.get_cookies ( )])
         # print(cookie)
         # driver.get("http://59.72.194.13/TimetableSearch/TimetableSerachStudentSingleSpan.aspx")

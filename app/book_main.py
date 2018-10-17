@@ -14,26 +14,10 @@ class main(object):
       listn = []
       for i in range (0, len (list1)):
        jsonlist = {}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
        if len(list1[i][0])>15:
            jsonlist['name'] = list1[i][0][0:15]+"..."
        else:
            jsonlist['name'] = list1[i][0]
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-       jsonlist['name'] = list1[i][0]
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
        jsonlist['idd'] = list1[i][1]
        jsonlist['sum'] = list2[i][0]
        jsonlist['avi'] = list2[i][1]
@@ -41,6 +25,7 @@ class main(object):
        listn.append(jsonlist)
       #print(listn)
       return listn
+	  
   def get_content(self,book):
       full_url = 'http://202.198.14.5:8080/opac/openlink.php?historyCount=1&strText=c语言&doctype=ALL&strSearchType=title&match_flag=forward&displaypg=20&sort=CATA_DATE&orderby=desc&showmode=list&dept=ALL'
       # book = input()
@@ -51,13 +36,6 @@ class main(object):
       content = response.read ( )
       soup = BeautifulSoup (content, 'html.parser', from_encoding='utf-8')
       return soup
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
       
   def get_numpage(self,book,pagenum):
       full_url = 'http://202.198.14.5:8080/opac/openlink.php?historyCount=1&strText=c语言&doctype=ALL&strSearchType=title&match_flag=forward&displaypg=20&sort=CATA_DATE&orderby=desc&showmode=list&dept=ALL'
@@ -69,12 +47,7 @@ class main(object):
       content = response.read ( )
       soup = BeautifulSoup (content, 'html.parser', from_encoding='utf-8')
       return soup
-      
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
 
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
   def get_booklist(self, soup):
     content2 = soup.find_all ('h3')
     list4 = []
@@ -90,9 +63,9 @@ class main(object):
 
   def get_booklistdetail(self,soup):
     content3 = soup.find('ol', id= 'search_book_list')
-
     lists = []
-    for i in range(0,len(content3)):
+    if content3 != None:
+      for i in range(0,len(content3)):
         list = []
         if i%2==1:
             a2 = (content3.contents[i].find ('p'))
@@ -104,6 +77,8 @@ class main(object):
             lists.append (list)
         else:
          continue
+    else:
+      lists.append("none")
     return lists
 
 
@@ -111,46 +86,15 @@ class main(object):
       index = []
       for i in range(len(list4)):
           index.append (list4[i][1])
-<<<<<<< HEAD
-<<<<<<< HEAD
-      print(index)
-=======
-<<<<<<< HEAD
-      print(index)
-=======
       #print(index)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-      print(index)
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
       return index
 
   def get_detail(self,remove):
-
     page_url = 'http://202.198.14.5:8080/opac/item.php?marc_no=0000241283'
     remove2 = "item.php?marc_no="+remove
-<<<<<<< HEAD
-<<<<<<< HEAD
-    print(remove2)
-    new_full_url = parse.urljoin(page_url,remove2)
-    print(new_full_url)
-=======
-<<<<<<< HEAD
-    print(remove2)
-    new_full_url = parse.urljoin(page_url,remove2)
-    print(new_full_url)
-=======
     #print(remove2)
     new_full_url = parse.urljoin(page_url,remove2)
     #print(new_full_url)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-    print(remove2)
-    new_full_url = parse.urljoin(page_url,remove2)
-    print(new_full_url)
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
     response = request.urlopen(new_full_url)
     content = response.read()
     soup = BeautifulSoup(content, 'html.parser', from_encoding='utf-8')
@@ -163,51 +107,15 @@ class main(object):
             temp = (content5.contents[i].find ('dt'))
             temp2 = (content5.contents[i].find ('dd'))
             tempdic[temp.get_text()] = temp2.get_text()
-<<<<<<< HEAD
-<<<<<<< HEAD
     temp3 = json.dumps(tempdic,ensure_ascii=False)
-    print(temp3)
-=======
-<<<<<<< HEAD
-    temp3 = json.dumps(tempdic,ensure_ascii=False)
-    print(temp3)
-=======
-    #temp3 = json.dumps(tempdic,ensure_ascii=False)
     #print(temp3)
-    #print(tempdic)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-    temp3 = json.dumps(tempdic,ensure_ascii=False)
-    print(temp3)
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
     tables = soup.findAll ('table', id='item')
     tab = tables[0]
     cont = tab.findAll ('tr')
     lists = []
-
     for i in range (1, len (tab.findAll ('tr'))):
         list = []
         for td in cont[i].find_all ('td'):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
-            text = td.text
-            text2 = text.split (' ')
-            list.append (text2)
-            print(list)
-        lists.append (list)
-    lists.append(temp3)
-    print (lists)
-    return  lists
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
            text = td.text
            text2 = text.split (' ')
            list.append (text2)
@@ -228,10 +136,7 @@ class main(object):
     #print(return_list)
     #return tempdic
     return  return_list
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
+
 
 
 

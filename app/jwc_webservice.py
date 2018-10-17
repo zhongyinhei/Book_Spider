@@ -5,63 +5,27 @@ from flask import request
 import urllib
 from bs4 import BeautifulSoup
 from app import app
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 import requests
 import random
 import socket
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
 
 
 @app.route('/main_fun', methods=['GET','POST'])
 def main_fun():
     if request.method == 'POST':
-<<<<<<< HEAD
-<<<<<<< HEAD
-        dic1 = request.form
-        print(dic1.to_dict())
-=======
-<<<<<<< HEAD
-        dic1 = request.form
-        print(dic1.to_dict())
-=======
-        #socket.setdefaulttimeout(3)
         dic1 = request.form
         #print(dic1.to_dict())
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-        dic1 = request.form
-        print(dic1.to_dict())
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         dic2 = dic1.to_dict()
         dic3 = parse.urlencode (dic2).encode (encoding='utf-8')
         header_dict = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
                        "Content-Type": "application/x-www-form-urlencoded"}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         url = 'http://59.72.194.12:8086/index.aspx'
         req = urllib.request.Request (url=url, data=dic3, headers=header_dict)
         res = urllib.request.urlopen (req)
         final_data = res.read ( ).decode ('utf-8')
-        print (final_data)
+        #print (final_data)
         return final_data
         #return jsonify(dic1)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         #iplist = ['http://59.72.194.12:8086/index.aspx','http://59.72.194.19:8081/index.aspx','http://59.72.194.19:9001/index.aspx','http://59.72.194.12:9099/index.aspx']
         #url = random.choice(iplist)
         url = 'http://59.72.194.21:9099/index.aspx'
@@ -72,21 +36,10 @@ def main_fun():
         res.close()
         return final_data
         #return jsonify(dic1) 
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
 
 @app.route('/table', methods=['GET','POST'])
 def get_table():
     if request.method == 'POST':
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         username = request.form.get['studentNo']
         pwd = request.form.get['password']
         from app import login_cookie
@@ -94,10 +47,6 @@ def get_table():
         cookies = cookiee.get_cookie (username, pwd)
         url2 = 'http://59.72.194.13/TimetableSearch/TimetableSerachStudentSingleSpan.aspx'
         r = urllib.requests.get (url2, cookies=cookies)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         username = request.form.get('studentNo')
         pwd = request.form.get('password')
         from app import login_cookies_new
@@ -105,10 +54,6 @@ def get_table():
         cookies = cookiee.get_cookie (username, pwd)
         url2 = 'http://59.72.194.13/TimetableSearch/TimetableSerachStudentSingleSpan.aspx'
         r = requests.get (url2, cookies=cookies)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         soup = BeautifulSoup (r.content, 'html.parser', from_encoding='utf-8')
         tables = soup.findAll ('table', id='TableLCRoomOccupy')
         tab = tables[0]
@@ -125,27 +70,16 @@ def get_table():
         # print(cont[1].findAll('td'))
         for i in range (1, len (tab.findAll ('tr'))):
             for td in cont[i].find_all ('td'):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
-                if i == 1:
-                    list1.append (td.text)
-                if i == 2:
-                    list2.append (td.text)
-                if i == 3:
-                    list3.append (td.text)
-                if i == 4:
-                    list4.append (td.text)
-                if i == 5:
-                    list5.append (td.text)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+             if i == 1:
+                list1.append (td.text)
+             if i == 2:
+                list2.append (td.text)
+             if i == 3:
+                list3.append (td.text)
+             if i == 4:
+                list4.append (td.text)
+             if i == 5:
+                list5.append (td.text)
              textx = td.getText('\n')
              listx = textx.split('\n')
              #print(listx)
@@ -173,14 +107,6 @@ def get_table():
         del list3[0]
         del list4[0]
         del list5[0]
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
-                    # list = []
-                    # list.append(td.text)
-                    # print(td.get_text())
-                    # print(list)
         lists.append (list1)
         lists.append (list2)
         lists.append (list3)
@@ -193,42 +119,12 @@ def get_table():
 @app.route('/books' , methods=['GET','POST'])
 def get_book():
     if request.method == 'POST':
-<<<<<<< HEAD
-<<<<<<< HEAD
-        book_name = request.form.get['book_name']
-=======
-<<<<<<< HEAD
-        book_name = request.form.get['book_name']
-=======
         book_name = request.form.get('book_name')
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-        book_name = request.form.get['book_name']
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
         from app import book_main
         book = book_main.main ( )
         content = book.get_content (book_name)
         list1 = book.get_booklist (content)
         list2 = book.get_booklistdetail (content)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
-        list3 = book.get_index (list1)
-        list4 = book.get_json (list1, list2)
-        print (list4)
-        from spider_book import global_ls
-        global_ls.global_list = list3
-        return jsonify (list4)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         #list3 = book.get_index (list1)
         list4 = book.get_json (list1, list2)
         #print (list4)
@@ -252,38 +148,10 @@ def get_pagebook():
         #from spider_book import global_ls
         #global_ls.global_list = list3
         return jsonify (list4)
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
 
 @app.route('/book_content',methods=['GET','POST'])
 def get_book_content():
     if request.method == 'POST':
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 增加爬取图书馆通知数据
-=======
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
-        book_index = request.form.get['book_index']
-        from app import book_main
-        book = book_main.main ()
-        print (book_index)
-        content = book.get_detail (book_index)
-        return jsonify (content)
-
-
-
-if __name__ == "__main__":
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-     app.run (debug=True)
-=======
-     app.run (debug=True)
-=======
         book_index = request.form.get('book_index')
         from app import book_main
         book = book_main.main ()
@@ -345,10 +213,4 @@ def get_data():
         content = book.get_data()
         return jsonify(content)
 
-		
 
->>>>>>> 2018,10,11(增加爬取图书馆通知数据)
->>>>>>> 增加爬取图书馆通知数据
-=======
-     app.run (debug=True)
->>>>>>> 0701ef0291a1b1ea8e0b31c609c273778a34a1c0
