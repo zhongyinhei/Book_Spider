@@ -205,12 +205,40 @@ def get_notice_content():
         content = book.get_notice_content(href)
         return jsonify(content)
 		
-@app.route('/get_data',methods=['GET','POST'])
+@app.route('/get_data',methods=['GET','POST']) #已废弃
 def get_data():
     if request.method == 'POST':
         from app import data_sourse
         book = data_sourse.Main()
         content = book.get_data()
         return jsonify(content)
+		
+@app.route('/login',methods=['GET','POST'])
+def get_login():
+    if request.method == 'POST':
+        code = request.form.get('code')
+        from app import get_code
+        book = get_code.main()
+        content = book.get_code(code)
+        return content
+		
+@app.route('/if_first',methods=['GET','POST'])
+def get_first():
+    if request.method == 'POST':
+        code = request.form.get('user_id')
+        from app import if_first
+        book = if_first.main()
+        content = book.if_first(code)
+        return content
+		
+@app.route('/first_insert',methods=['GET','POST'])
+def first_insert():
+    if request.method == 'POST':
+        from app import first_intel
+        user_id = request.form.get('user_id')
+        list = request.form.get('series_list')
+        book = first_intel.main()
+        content = book.insert_first(user_id,list)
+        return content
 
 
